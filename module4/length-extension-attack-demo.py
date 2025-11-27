@@ -77,6 +77,7 @@ def demo_length_extension(secret_len_guess: int):
     # 3. Angriberen starter MD5 i samme interne state som original_token
     #    og fortsætter med SUFFIX
     forged_md5 = md5(state=bytes.fromhex(original_token), count=original_len_bits + len(pad) * 8)
+    # print(forged_md5.hexdigest())  # Debug: vis den initielle state
     forged_md5.update(SUFFIX)
     forged_token = forged_md5.hexdigest()
 
