@@ -32,8 +32,22 @@ with open("rsa_public_key.pem", "wb") as rsa_file:
         format=serialization.PublicFormat.SubjectPublicKeyInfo)
     rsa_file.write(pem)
 
+# Reset keys
+public_key = None
+private_key = None
+
+# Load public RSA key from file
+with open("rsa_public_key.pem", "rb") as rsa_file:
+    pem = rsa_file.read()
+    public_key = serialization.load_pem_public_key(pem)
+
+# Load private RSA key from file
+with open("rsa_private_key.pem", "rb") as rsa_file:
+    pem = rsa_file.read()
+    private_key = serialization.load_pem_private_key(pem, password=None)
+
 # Encryption
-plaintext = b'Hello world' 
+plaintext = b'Hello world' * 15 
 
 ciphertext = public_key.encrypt(
     plaintext,
