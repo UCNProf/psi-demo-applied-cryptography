@@ -7,9 +7,12 @@ import socket
 HOST = '127.0.0.1' # Localhost
 PORT = 9999 # Choose port above 1024
 
+print("Server started, waiting for connection...")
+
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
     sock.bind((HOST, PORT))
     sock.listen()
+
     conn, addr = sock.accept()
     with conn:
         print("Connection received from:", addr)
